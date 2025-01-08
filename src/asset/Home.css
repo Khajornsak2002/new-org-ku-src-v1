@@ -1,0 +1,65 @@
+.App {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  
+  h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #61dafb;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 100%; /* เพิ่มความยาวปุ่มให้เต็มพื้นที่ */
+    max-width: 600px; /* จำกัดความกว้างสูงสุด */
+    margin-top: 20px; /* ให้มีระยะห่างระหว่างปุ่ม */
+  }
+
+  button:disabled {
+    background-color: #d3d3d3;  /* สีพื้นหลังอ่อน */
+    cursor: not-allowed;  /* เปลี่ยนเป็น cursor ที่ไม่สามารถคลิกได้ */
+    opacity: 0.6;  /* ลดความชัดเจนของปุ่ม */
+  }
+  
+  button:hover {
+    background-color: #21a1f1;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+
+  .org-structure-button:disabled {
+    background-color: #6c757d;  /* สีพื้นหลังเมื่อปุ่ม disabled */
+    color: #fff;  /* สีตัวอักษร */
+  }
+  
+  .org-structure-button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .org-structure-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .org-structure-button:focus {
+    outline: none;
+  }
+  
