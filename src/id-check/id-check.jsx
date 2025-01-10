@@ -36,20 +36,18 @@ function IdCheck() {
     }
   };
 
-  // ฟังก์ชันสำหรับดาวน์โหลดไฟล์ Excel
   const downloadExcel = () => {
     if (errorList.length === 0) {
       alert('ไม่มีข้อมูลผิดพลาดเพื่อส่งออก');
       return;
     }
 
-    const ws = XLSX.utils.json_to_sheet(errorList); // แปลงข้อมูลเป็น sheet
-    const wb = XLSX.utils.book_new(); // สร้าง workbook ใหม่
-    XLSX.utils.book_append_sheet(wb, ws, 'Error List'); // เพิ่ม sheet ลงใน workbook
-    XLSX.writeFile(wb, 'error-list.xlsx'); // ดาวน์โหลดไฟล์
+    const ws = XLSX.utils.json_to_sheet(errorList);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Error List');
+    XLSX.writeFile(wb, 'error-list.xlsx');
   };
 
-  // คำนวณจำนวนข้อมูลทั้งหมด, ผิดพลาด, และถูกต้อง
   const studentIdList = studentIds.split('\n').map(id => id.trim());
   const totalCount = studentIdList.length;
   const errorCount = errorList.length;
@@ -58,17 +56,19 @@ function IdCheck() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* ปุ่มกลับไปหน้า Home พร้อมไอคอน */}
         <button onClick={() => navigate('/')} className="home-button">
-          <IoReturnDownBackSharp style={{ marginRight: '8px' }} /> {/* ไอคอนกลับ */}
+          <IoReturnDownBackSharp style={{ marginRight: '8px' }} />
           Home
         </button>
 
         <h2>ระบบตรวจสอบรหัสนิสิต</h2>
-
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="student_ids">กรอกรหัสนิสิต (10 หลักต่อ 1 บรรทัด):</label>
-            <textarea
+        <h5>***สำหรับองค์กรนิสิตที่ต้องการตรวจสอบรหัสนิสิตซ้ำหรือรหัสนิสิตไม่ครบ 10 หลัก ของระบบชั่วโมงกิจกรรม***</h5>
+        <div className="container">
+          {/* ฝั่งซ้าย */}
+          <div className="form-section">
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="student_ids">กรอกรหัสนิสิต (10 หลักต่อ 1 บรรทัด):</label>
+              <textarea
                 id="student_ids"
                 name="student_ids"
                 value={studentIds}
@@ -77,50 +77,51 @@ function IdCheck() {
                 cols="30"
                 placeholder="กรอกรหัสนิสิต"
                 required
-            />
+              />
+              <div>
+                <button className="button" type="submit">ตรวจสอบ</button>
+                <button
+                  className="button-reset"
+                  type="button"
+                  onClick={() => { setStudentIds(''); setErrorList([]); }}
+                >
+                  Reset
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* ฝั่งขวา */}
+          <div className="error-section">
+            {errorList.length > 0 && (
+              <button className="download-button" onClick={downloadExcel}>
+                <FaDownload style={{ marginRight: '8px' }} /> ดาวน์โหลด Excel
+              </button>
+            )}
+
             <div>
-                <button type="submit">ตรวจสอบ</button>
-                <button type="button" onClick={() => { setStudentIds(''); setErrorList([]); }}>Reset</button>
+              {errorList.length > 0 ? (
+                <table>
+                  <thead>
+                    <tr>
+                      <th>รหัสนิสิต</th>
+                      <th>ข้อผิดพลาด</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {errorList.map((errorItem, index) => (
+                      <tr key={index}>
+                        <td>{errorItem.id}</td>
+                        <td>{errorItem.error}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <div className="success-message">ไม่มีข้อมูลผิดพลาด</div>
+              )}
             </div>
-        </form>
-
-        <div className="summary-container">
-          {studentIds && (
-            <div className="summary">
-              <p>จำนวนข้อมูลทั้งหมด: {totalCount} ชุด</p>
-              <p>ข้อมูลผิดพลาด: {errorCount} ชุด</p>
-              <p>ข้อมูลถูกต้อง: {correctCount} ชุด</p>
-            </div>
-          )}
-
-          {errorList.length > 0 && (
-            <button className="download-button" onClick={downloadExcel}>
-              <FaDownload style={{ marginRight: '8px' }} /> ดาวน์โหลด Excel
-            </button>
-          )}
-        </div>
-
-        <div id="">
-          {errorList.length > 0 ? (
-            <table>
-              <thead>
-                <tr>
-                  <th>รหัสนิสิต</th>
-                  <th>ข้อผิดพลาด</th>
-                </tr>
-              </thead>
-              <tbody>
-                {errorList.map((errorItem, index) => (
-                  <tr key={index}>
-                    <td>{errorItem.id}</td>
-                    <td>{errorItem.error}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <div className="success-message">ไม่มีข้อมูลผิดพลาด</div>
-          )}
+          </div>
         </div>
       </header>
     </div>

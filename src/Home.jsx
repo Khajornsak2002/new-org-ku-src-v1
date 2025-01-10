@@ -10,8 +10,9 @@ function Home() {
   };
 
   const handleNavigate1 = () => {
-    navigate('/organization-structure'); // ไปยัง /organization-structure
+    window.open('https://eduserv.src.ku.ac.th/projectnisit/', '_blank');
   };
+  
 
   const handleNavigate2 = () => {
     navigate('/organization-structure'); // ไปยัง /organization-structure
@@ -28,9 +29,14 @@ function Home() {
           ไปที่หน้าตรวจสอบรหัสนิสิต <HiArrowCircleRight />
         </button>
 
+        {/* ปุ่มสำหรับเมนูระบบบันทึกโครงการ */}
+        <button onClick={handleNavigate1} className="org-structure-button" >
+          ระบบบันทึกโครงการและกิจกรรมนิสิต KUSRC <HiArrowCircleRight />
+        </button>
+
         {/* ปุ่มสำหรับเมนูโครงสร้างองค์กร */}
-        <button onClick={handleNavigate1} className="org-structure-button" disabled>
-          ดูโครงสร้างองค์กร <HiArrowCircleRight />
+        <button onClick={handleNavigate2} className="org-structure-button" >
+          โครงสร้างองค์กรนิสิต <HiArrowCircleRight />
         </button>
       </header>
     </div>

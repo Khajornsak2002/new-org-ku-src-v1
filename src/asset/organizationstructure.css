@@ -1,0 +1,137 @@
+.organization-structure {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+  background-color: #302f2f;
+  height: 100%; /* ให้ div นี้เต็มความสูงของหน้าจอ */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* จัดให้เนื้อหาอยู่กลาง */
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #fafafa;
+}
+
+.organization-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 คอลัมน์ */
+  gap: 10px;
+  justify-items: center;
+  margin-bottom: 20px;
+  height: 120px; /* กำหนดความสูงคงที่ของกรอบปุ่ม */
+  align-items: center; /* จัดกึ่งกลางปุ่มในแนวตั้ง */
+}
+
+.tab-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 200px; /* ขยายปุ่มให้เต็มคอลัมน์ */
+  max-width: 200px; /* กำหนดความกว้างสูงสุดของปุ่ม */
+}
+
+.tab-button.active {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.tab-button:hover {
+  background-color: #0056b3;
+}
+
+.organization-details {
+  font-size: 1.2em;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  min-height: 100px; /* กำหนดความสูงขั้นต่ำของข้อความ */
+  max-width: 600px; /* กำหนดความกว้างสูงสุด */
+  margin: 0 auto; /* จัดข้อความให้อยู่ตรงกลาง */
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* อยู่ใต้ปุ่ม */
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 10;
+  transform: scaleY(0); /* ซ่อนเมนูโดยใช้ scale */
+  transform-origin: top;
+  transition: transform 0.3s ease; /* เพิ่มการเปลี่ยนแปลงที่นุ่มนวล */
+  visibility: hidden; /* ซ่อนเมนู */
+  height: auto; /* กำหนดความสูงอัตโนมัติ */
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown:hover .dropdown-menu {
+  transform: scaleY(1); /* แสดงเมนูเมื่อ hover */
+  visibility: visible; /* แสดงเมนู */
+}
+
+.dropdown-item {
+  padding: 10px;
+  text-align: left;
+  border: none;
+  background-color: #f1f1f1;
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-item.active,
+.dropdown-item:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* ป้องกันการกระทบต่อ layout */
+.dropdown-menu {
+  min-height: 50px; /* กำหนดความสูงขั้นต่ำเพื่อกัน layout ขยับ */
+  overflow: hidden; /* ซ่อนส่วนเกิน */
+}
+
+.home-button {
+  position: absolute; /* ทำให้ปุ่มอยู่ในตำแหน่งบนสุดซ้าย */
+  width: 170px;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+  background-color: #45a049;
+}
+
+.home-button:focus {
+  outline: none;
+}
+
+.home-button svg {
+  vertical-align: middle; /* ทำให้ไอคอนอยู่กลางข้อความ */
+}
+
